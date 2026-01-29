@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Rodrigo Cárcamo Hurtado - Ingeniero Comercial & Especialista IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --secondary: #64748b;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+        }
+
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin: 4px;
+            transition: all 0.2s;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: var(--accent);
+            opacity: 0.2;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -5px;
+            width: 12px; height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .text-justified {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background: radial-gradient(circle at 10% 10%, #1e40af 0%, transparent 50%),
+                        radial-gradient(circle at 90% 90%, #1e3a8a 0%, transparent 50%);
+        }
+
+        .service-item {
+            font-size: 0.875rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .service-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateX(4px);
+        }
+
+        #contactModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        #contactModal.active {
+            display: flex;
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 8px !important;
+            color: #94a3b8 !important;
+            padding: 0.75rem !important;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-field:focus {
+            border-color: var(--accent) !important;
+        }
+        .submit-btn {
+            background: #3b82f6 !important;
+            color: white !important;
+            font-weight: 700 !important;
+            padding: 0.9rem !important;
+            border-radius: 12px !important;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background: #2563eb !important;
+        }
+
+        @media print {
+            @page { margin: 1cm; size: A4; }
+            .no-print { display: none !important; }
+            .glass-card {
+                background: white !important;
+                color: black !important;
+                border: 1px solid #eee !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+                padding: 1.2rem !important;
+                margin-bottom: 0.8rem !important;
+            }
+            body { background: white !important; color: black !important; padding: 0 !important; margin: 0 !important; }
+            .text-white, h1, h2, h3 { color: #0f172a !important; }
+            .text-blue-500, .text-blue-300, .text-blue-400 { color: #2563eb !important; }
+            .skill-tag { border: 1px solid #ddd !important; color: #0f172a !important; background: #f1f5f9 !important; }
+            .service-item { border: 1px solid #eee !important; color: #334155 !important; }
+            main { max-width: 100% !important; margin: 0 !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+    <div class="animated-bg no-print"></div>
+
+    <main class="max-w-5xl mx-auto space-y-6">
+        
+        <!-- HEADER -->
+        <header class="glass-card p-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="space-y-2">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
+                    Rodrigo <span class="text-blue-500">Cárcamo Hurtado</span>
+                </h1>
+                <p class="text-xl text-blue-300 font-light italic">FUNDADOR DataflowIA</p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-sm text-slate-400">
+                    <span>📍 Chile</span>
+                    <span>✉️ rodrigo@dataflowia.com</span>
+                    <span class="text-blue-400">🌐 www.dataflowia.com</span>
+                </div>
+            </div>
+            <div class="w-24 h-24 rounded-full border-2 border-blue-500/30 flex items-center justify-center bg-blue-500/5 no-print">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+            </div>
+        </header>
+
+        <!-- PERFIL PROFESIONAL -->
+        <section class="glass-card p-8">
+            <h2 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
+                <span class="w-8 h-1 bg-blue-500 rounded-full"></span>
+                Perfil Profesional
+            </h2>
+            <p class="text-slate-300 leading-relaxed text-lg text-justified">
+                <span class="text-white font-semibold">Ingeniero Comercial de la Universidad de Santiago de Chile</span>, con más de <span class="text-blue-400 font-semibold">3 años de especialización en Inteligencia Artificial</span> y transformación digital. Experto en diseño e implementación de <span class="text-blue-400 font-semibold">arquitecturas RAG</span>, despliegue de <span class="text-blue-400 font-semibold">GPTs corporativos</span> y optimización de flujos con modelos de lenguaje de última generación. Fundador de <span class="text-blue-500 font-bold">DataflowIA</span>, enfocado en soluciones empresariales basadas en IA que generan impacto medible. Con experiencia previa en liderazgo ejecutivo y gestión comercial, combino visión estratégica de negocio con expertise técnico en IA para crear soluciones innovadoras y escalables.
+            </p>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- LEFT COLUMN -->
+            <div class="md:col-span-1 space-y-6">
+                <!-- Plataformas IA -->
+                <section class="glass-card p-6">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+                        <svg class="w-5 h-5 text-blue-500 no-print" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM13.586 15.586a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM16 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1z"></path></svg>
+                        Plataformas IA
+                    </h2>
+                    <div class="flex flex-wrap mb-6">
+                        <span class="skill-tag">DeepSeek</span><span class="skill-tag">Qwan 3.0</span><span class="skill-tag">Perplexity</span>
+                        <span class="skill-tag">Gemini</span><span class="skill-tag">Chat GPT</span><span class="skill-tag">Claude</span>
+                        <span class="skill-tag">Meta</span><span class="skill-tag">Abacus IA</span>
+                    </div>
+
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-blue-400">
+                        <svg class="w-5 h-5 no-print" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+                        Especialidades
+                    </h2>
+                    <div class="space-y-2 mb-8">
+                        <div class="text-sm p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 font-medium text-blue-200">Relatorías & Charlas IA</div>
+                        <div class="text-sm p-3 rounded-lg bg-white/5 border border-white/10 font-semibold text-blue-300">Teasers Animados</div>
+                        <div class="text-sm p-3 rounded-lg bg-white/5 border border-white/10">Vibe Coding & App Dev</div>
+                        <div class="text-sm p-3 rounded-lg bg-white/5 border border-white/10">Generador de módulos educativos</div>
+                        <div class="text-sm p-3 rounded-lg bg-white/5 border border-white/10">Cápsulas de Aprendizaje IA</div>
+                    </div>
+
+                    <!-- SERVICIOS ESPECIALIZADOS -->
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+                        <span class="w-5 h-1 bg-blue-500 rounded-full"></span>
+                        Servicios Especializados
+                    </h2>
+                    <div class="space-y-2">
+                        <div class="service-item border-l-2 border-l-blue-500">Consultoría en IA Empresarial</div>
+                        <div class="service-item">Workshops & Masterclasses IA</div>
+                        <div class="service-item">Programas de Inducción Avanzada</div>
+                        <div class="service-item">Desarrollo de Apps con IA</div>
+                        <div class="service-item">Generación de Contenido Educativo</div>
+                        <div class="service-item">Video Marketing con IA</div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- RIGHT COLUMN: EXPERIENCIA -->
+            <div class="md:col-span-2 space-y-6">
+                <section class="glass-card p-8">
+                    <h2 class="text-2xl font-bold mb-8 text-blue-400">Experiencia Profesional</h2>
+                    <div class="space-y-8 relative">
+                        <div class="timeline-line"></div>
+
+                        <!-- DataflowIA -->
+                        <div class="relative pl-8">
+                            <div class="timeline-dot"></div>
+                            <div class="flex justify-between items-start flex-wrap">
+                                <h3 class="text-lg font-bold text-white">DataflowIA</h3>
+                                <span class="px-2 py-1 bg-blue-500/10 text-blue-400 text-xs font-bold rounded">2025 - PRESENTE</span>
+                            </div>
+                            <p class="text-blue-300 font-semibold text-sm">Socio Fundador & AI Solutions Architect</p>
+                            <ul class="text-slate-400 mt-2 text-sm space-y-2">
+                                <li class="flex gap-2 text-justified">
+                                    <span>•</span> 
+                                    <span>Diseño e implementación de <b>arquitecturas RAG</b> para empresas, mejorando la precisión de respuestas en un 40%.</span>
+                                </li>
+                                <li class="flex gap-2 text-justified">
+                                    <span>•</span> 
+                                    <span>Despliegue de <b>GPTs corporativos personalizados</b> para automatización de procesos empresariales.</span>
+                                </li>
+                                <li class="flex gap-2 text-justified">
+                                    <span>•</span> 
+                                    <span>Optimización de flujos con <b>LLMs de última generación</b> (Claude, GPT-4, Gemini).</span>
+                                </li>
+                                <li class="flex gap-2 text-justified">
+                                    <span>•</span> 
+                                    <span>Consultoría estratégica en <b>transformación digital con IA</b> para empresas medianas y grandes.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Visual Web Videos -->
+                        <div class="relative pl-8">
+                            <div class="timeline-dot"></div>
+                            <div class="flex justify-between items-start flex-wrap">
+                                <h3 class="text-lg font-bold text-white">Visual Web Videos</h3>
+                                <span class="px-2 py-1 bg-white/5 text-slate-500 text-xs font-bold rounded">2023 - 2025</span>
+                            </div>
+                            <p class="text-blue-300 font-semibold text-sm">Fundador & Director Creativo</p>
+                            <ul class="text-slate-400 mt-2 text-sm space-y-2">
+                                <li class="flex gap-2 text-justified">
+                                    <span>•</span> 
+                                    <span>Pionero en <b>video marketing digital asistido por IA</b> en Chile.</span>
+                                </li>
+                                <li class="flex gap-2 text-justified">
+                                    <span>•</span> 
+                                    <span>Creación de <b>contenido educativo y animaciones</b> utilizando herramientas de IA generativa.</span>
+                                </li>
+                                <li class="flex gap-2 text-justified">
+                                    <span>•</span> 
+                                    <span>Desarrollo de <b>teasers animados</b> y material publicitario con tecnología de vanguardia.</span>
+                                </li>
+                                <li class="text-xs italic text-slate-500 mt-1">Marketing, Videos, Manager, Website, Cápsulas educativas.</li>
+                            </ul>
+                        </div>
+
+                        <!-- ICASA SPA -->
+                        <div class="relative pl-8">
+                            <div class="timeline-dot bg-slate-600"></div>
+                            <div class="flex justify-between items-start flex-wrap">
+                                <h3 class="text-lg font-bold text-white">ICASA SPA</h3>
+                                <span class="text-xs text-slate-500 font-bold">2012 - 2022</span>
+                            </div>
+                            <p class="text-blue-300/80 text-sm font-semibold">Gerente General - Socio</p>
+                        </div>
+
+                        <!-- Constructora Cuatrosur -->
+                        <div class="relative pl-8">
+                            <div class="timeline-dot bg-slate-600"></div>
+                            <div class="flex justify-between items-start flex-wrap">
+                                <h3 class="text-lg font-bold text-white">Constructora Cuatrosur</h3>
+                                <span class="text-xs text-slate-500 font-bold">2001 - 2012</span>
+                            </div>
+                            <p class="text-blue-300/80 text-sm font-semibold">Gerente General - Socio</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="glass-card p-10 text-center bg-blue-600/5 no-print space-y-6">
+            <div class="max-w-2xl mx-auto space-y-2">
+                <h2 class="text-3xl font-extrabold text-white">¿Listo para transformar tu negocio con IA?</h2>
+                <p class="text-slate-400 text-lg">Conversemos sobre cómo la Inteligencia Artificial puede impulsar la innovación y eficiencia en tu organización.</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 pt-4">
+                <button type="button" onclick="handleDownload()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-600/20">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Descargar CV (PDF)
+                </button>
+                <button type="button" onclick="openModal()" class="border border-blue-500/50 hover:border-blue-500 bg-blue-500/5 text-blue-400 px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-2 cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Enviar Mensaje
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- CONTACT MODAL -->
+    <div id="contactModal" class="no-print" onclick="closeModal(event)">
+        <div class="glass-card w-full max-w-lg p-8 space-y-6" onclick="event.stopPropagation()" style="background: #111827; border: 1px solid rgba(255,255,255,0.05);">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-white tracking-tight">Enviar Mensaje</h2>
+                <button onclick="closeModal()" class="text-slate-500 hover:text-white cursor-pointer transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- El formulario ahora envía directamente a rodrigo@dataflowia.com -->
+            <form id="contactForm" class="space-y-4" onsubmit="handleFormSubmit(event)">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-2">Nombre completo</label>
+                    <input type="text" id="nameInput" placeholder="Tu nombre" required class="input-field">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-2">Email</label>
+                    <input type="email" id="emailInput" placeholder="tu@email.com" required class="input-field">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-2">Mensaje</label>
+                    <textarea id="msgInput" placeholder="Cuéntame sobre tu proyecto..." required rows="4" class="input-field resize-none"></textarea>
+                </div>
+                <div class="pt-4">
+                    <button type="submit" class="submit-btn cursor-pointer">
+                        Enviar a rodrigo@dataflowia.com
+                    </button>
+                </div>
+            </form>
+            <div id="formStatus" class="hidden text-center p-3 rounded-lg bg-green-500/10 text-green-400 font-medium">
+                Abriendo tu aplicación de correo...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleDownload() {
+            try {
+                setTimeout(() => { window.print(); }, 50);
+            } catch (err) { console.error("Error al imprimir:", err); }
+        }
+
+        function openModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(e) {
+            const modal = document.getElementById('contactModal');
+            if (!e || e.target.id === 'contactModal' || (e.type === 'click' && e.target.closest('button'))) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const status = document.getElementById('formStatus');
+            const form = document.getElementById('contactForm');
+            
+            const name = document.getElementById('nameInput').value;
+            const email = document.getElementById('emailInput').value;
+            const message = document.getElementById('msgInput').value;
+
+            // Incrustando el email solicitado
+            const recipient = "rodrigo@dataflowia.com";
+            const subject = encodeURIComponent(`Nuevo contacto desde CV: ${name}`);
+            const body = encodeURIComponent(`Hola Rodrigo,\n\nHas recibido un nuevo mensaje desde tu CV web:\n\nNombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`);
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = "Preparando correo...";
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                // Abre el cliente de correo con los datos incrustados
+                window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+                
+                form.classList.add('hidden');
+                status.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    closeModal();
+                    form.reset();
+                    form.classList.remove('hidden');
+                    status.classList.add('hidden');
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 3000);
+            }, 500);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
