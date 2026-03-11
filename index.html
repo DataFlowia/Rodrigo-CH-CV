@@ -3,442 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Rodrigo Cárcamo Hurtado - Ingeniero Comercial & Especialista IA</title>
+    <title>Relatoría IA - Rodrigo Cárcamo - Dataflow IA</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a;
-            --accent: #3b82f6;
-            --secondary: #64748b;
-            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --color-cian: #06b6d4;
+            --color-indigo: #6366f1;
+            --color-pink: #ec4899;
+            --color-emerald: #10b981;
+            --bg-dark: #020617;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-gradient);
-            color: #f8fafc;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: #f1f5f9;
             overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: 'Poppins', sans-serif;
+        h1, .brand-logo {
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .glass-card {
+        .container-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-3d {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .card-3d.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-3d:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.6);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .border-glow-cian { border-left: 6px solid var(--color-cian); }
+        .border-glow-indigo { border-left: 6px solid var(--color-indigo); }
+        .border-glow-pink { border-left: 6px solid var(--color-pink); }
+        .border-glow-emerald { border-left: 6px solid var(--color-emerald); }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .circuit-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/circuit-board.png');
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .form-input {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card:hover {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
-        }
-
-        .skill-tag {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            display: inline-block;
-            margin: 4px;
-            transition: all 0.2s;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 2px;
-            background: var(--accent);
-            opacity: 0.2;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -5px;
-            width: 12px; height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-
-        .text-justified {
-            text-align: justify;
-            text-justify: inter-word;
-        }
-
-        .animated-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            opacity: 0.3;
-            background: radial-gradient(circle at 10% 10%, #1e40af 0%, transparent 50%),
-                        radial-gradient(circle at 90% 90%, #1e3a8a 0%, transparent 50%);
-        }
-
-        .service-item {
-            font-size: 0.875rem;
+            border-radius: 0.75rem;
             padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s ease;
-        }
-        .service-item:hover {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.3);
-            transform: translateX(4px);
-        }
-
-        #contactModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 50;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        #contactModal.active {
-            display: flex;
-        }
-
-        .input-field {
-            background: rgba(255, 255, 255, 0.03) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 8px !important;
-            color: #94a3b8 !important;
-            padding: 0.75rem !important;
             width: 100%;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .input-field:focus {
-            border-color: var(--accent) !important;
-        }
-        .submit-btn {
-            background: #3b82f6 !important;
-            color: white !important;
-            font-weight: 700 !important;
-            padding: 0.9rem !important;
-            border-radius: 12px !important;
-            width: 100%;
-            transition: background 0.2s;
-        }
-        .submit-btn:hover {
-            background: #2563eb !important;
+            color: white;
+            font-family: 'Roboto', sans-serif;
         }
 
-        @media print {
-            @page { margin: 1cm; size: A4; }
-            .no-print { display: none !important; }
-            .glass-card {
-                background: white !important;
-                color: black !important;
-                border: 1px solid #eee !important;
-                box-shadow: none !important;
-                break-inside: avoid;
-                padding: 1.2rem !important;
-                margin-bottom: 0.8rem !important;
-            }
-            body { background: white !important; color: black !important; padding: 0 !important; margin: 0 !important; }
-            .text-white, h1, h2, h3 { color: #0f172a !important; }
-            .text-blue-500, .text-blue-300, .text-blue-400 { color: #2563eb !important; }
-            .skill-tag { border: 1px solid #ddd !important; color: #0f172a !important; background: #f1f5f9 !important; }
-            .service-item { border: 1px solid #eee !important; color: #334155 !important; }
-            main { max-width: 100% !important; margin: 0 !important; }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
+<body class="antialiased">
 
-    <div class="animated-bg no-print"></div>
+    <div class="circuit-bg"></div>
 
-    <main class="max-w-5xl mx-auto space-y-6">
-        
-        <!-- HEADER -->
-        <header class="glass-card p-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="space-y-2">
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
-                    Rodrigo <span class="text-blue-500">Cárcamo Hurtado</span>
-                </h1>
-                <p class="text-xl text-blue-300 font-light italic">FUNDADOR DataflowIA</p>
-                <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-sm text-slate-400">
-                    <span>📍 Chile</span>
-                    <span>✉️ rodrigo@dataflowia.com</span>
-                    <span class="text-blue-400">🌐 www.dataflowia.com</span>
+    <header class="relative pt-32 pb-20 px-8">
+        <div class="absolute top-8 left-8 z-50">
+            <div class="brand-logo text-cyan-400 font-black text-2xl tracking-tighter flex items-center gap-2">
+                <div class="w-8 h-8 bg-cyan-400 rounded-sm rotate-45 flex items-center justify-center">
+                    <div class="w-4 h-4 bg-slate-950 rounded-full"></div>
+                </div>
+                DATAFLOW IA
+            </div>
+        </div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-bold uppercase tracking-[0.4em] mb-6">Relatoría Magistral</span>
+            <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-white to-pink-500 uppercase">
+                El Despertar de la Máquina
+            </h1>
+            <div class="flex flex-col items-center">
+                <div class="h-1 w-24 bg-gradient-to-r from-cyan-500 to-pink-500 mb-6"></div>
+                <div class="space-y-1">
+                    <span class="block text-gray-500 uppercase text-[10px] tracking-widest">Ponente</span>
+                    <h2 class="text-3xl font-bold text-white uppercase font-roboto">Rodrigo Cárcamo Hurtado</h2>
+                    <p class="text-gray-400 font-medium text-sm mb-1 uppercase tracking-wider">Ingeniero Comercial - USACH</p>
+                    <span class="text-cyan-400 font-medium tracking-widest uppercase text-sm">Fundador DataflowIA</span>
                 </div>
             </div>
-            <div class="w-24 h-24 rounded-full border-2 border-blue-500/30 flex items-center justify-center bg-blue-500/5 no-print">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-            </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- PERFIL PROFESIONAL -->
-        <section class="glass-card p-8">
-            <h2 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
-                <span class="w-8 h-1 bg-blue-500 rounded-full"></span>
-                Perfil Profesional
-            </h2>
-            <p class="text-slate-300 leading-relaxed text-lg text-justified">
-                <span class="text-white font-semibold">Ingeniero Comercial de la Universidad de Santiago de Chile</span>, con más de <span class="text-blue-400 font-semibold">3 años de especialización en Inteligencia Artificial</span> y transformación digital. Experto en diseño e implementación de <span class="text-blue-400 font-semibold">arquitecturas RAG</span>, despliegue de <span class="text-blue-400 font-semibold">GPTs corporativos</span> y optimización de flujos con modelos de lenguaje de última generación. Fundador de <span class="text-blue-500 font-bold">DataflowIA</span>, enfocado en soluciones empresariales basadas en IA que generan impacto medible. Con experiencia previa en liderazgo ejecutivo y gestión comercial, combino visión estratégica de negocio con expertise técnico en IA para crear soluciones innovadoras y escalables.
-            </p>
+    <main class="max-w-6xl mx-auto px-6 space-y-24 pb-32">
+
+        <!-- Panel de Resumen Inicial -->
+        <div class="card-3d visible glass-panel p-8 md:p-10 border-t-4 border-cyan-500">
+            <div class="grid md:grid-cols-4 gap-8 items-center">
+                <div class="md:col-span-3">
+                    <h2 class="container-title text-white mb-3">De la Lógica de Turing a la Psique Humana</h2>
+                    <p class="text-gray-400 leading-relaxed">Una exploración profunda sobre cómo la inteligencia artificial ha dejado de ser una herramienta para convertirse en una extensión de nuestra conducta y estructura social.</p>
+                </div>
+                <div class="bg-slate-900/50 rounded-2xl p-6 text-center border border-white/5">
+                    <div class="text-4xl font-black text-pink-500">2026</div>
+                    <div class="text-[10px] uppercase tracking-widest font-bold text-gray-500">Año de Proyección</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulos de la Relatoría -->
+        <section class="card-3d border-glow-cian p-10 md:p-16 flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-cyan-400 font-black text-4xl opacity-20">01</span>
+                    <h3 class="container-title text-white">Génesis: Sueños de Silicio</h3>
+                </div>
+                <p class="text-gray-400 leading-relaxed mb-6">Desde el Test de Turing en 1950 hasta la explosión del Deep Learning. Analizamos cómo la convergencia de datos masivos sacó a la IA de los laboratorios hacia la infraestructura global.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart1"></canvas>
+            </div>
         </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <!-- LEFT COLUMN -->
-            <div class="md:col-span-1 space-y-6">
-                <!-- Plataformas IA -->
-                <section class="glass-card p-6">
-                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">
-                        <svg class="w-5 h-5 text-blue-500 no-print" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM13.586 15.586a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM16 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1z"></path></svg>
-                        Plataformas IA
-                    </h2>
-                    <div class="flex flex-wrap mb-6">
-                        <span class="skill-tag">DeepSeek</span><span class="skill-tag">Qwan 3.0</span><span class="skill-tag">Perplexity</span>
-                        <span class="skill-tag">Gemini</span><span class="skill-tag">Chat GPT</span><span class="skill-tag">Claude</span>
-                        <span class="skill-tag">Meta</span><span class="skill-tag">Abacus IA</span>
-                    </div>
+        <section class="card-3d border-glow-indigo p-10 md:p-16 flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
+            <div class="chart-container order-2 md:order-1">
+                <canvas id="chart2"></canvas>
+            </div>
+            <div class="order-1 md:order-2">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-indigo-400 font-black text-4xl opacity-20">02</span>
+                    <h3 class="container-title text-white">Vida Diaria: Presencia Invisible</h3>
+                </div>
+                <p class="text-gray-400 leading-relaxed mb-6">Los algoritmos ya no son externos; son la arquitectura de nuestra realidad. Moldean deseos a través de sistemas de recomendación y burbujas de filtros.</p>
+            </div>
+        </section>
 
-                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-blue-400">
-                        <svg class="w-5 h-5 no-print" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
-                        Especialidades
-                    </h2>
-                    <div class="space-y-2 mb-8">
-                        <div class="text-sm p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 font-medium text-blue-200">Relatorías & Charlas IA</div>
-                        <div class="text-sm p-3 rounded-lg bg-white/5 border border-white/10 font-semibold text-blue-300">Teasers Animados</div>
-                        <div class="text-sm p-3 rounded-lg bg-white/5 border border-white/10">Vibe Coding & App Dev</div>
-                        <div class="text-sm p-3 rounded-lg bg-white/5 border border-white/10">Generador de módulos educativos</div>
-                        <div class="text-sm p-3 rounded-lg bg-white/5 border border-white/10">Cápsulas de Aprendizaje IA</div>
-                    </div>
+        <section class="card-3d border-glow-pink p-10 md:p-16 flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-pink-400 font-black text-4xl opacity-20">03</span>
+                    <h3 class="container-title text-white">Economía: Humano vs Copiloto</h3>
+                </div>
+                <p class="text-gray-400 leading-relaxed mb-6">La IA como el copiloto definitivo. No se trata de sustitución, sino de aumento de capacidades. Basado en reportes de Goldman Sachs sobre automatización selectiva.</p>
+                <div class="chart-container" style="height: 200px;">
+                    <canvas id="chart3"></canvas>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-pink-500/10 p-6 rounded-2xl border border-pink-500/20">
+                    <h4 class="text-pink-400 font-bold mb-2 text-sm uppercase">Impacto en Profesiones</h4>
+                    <p class="text-xs text-gray-300">Roles de programación y administración enfrentan una automatización del 40-60% de tareas.</p>
+                </div>
+            </div>
+        </section>
 
-                    <!-- SERVICIOS ESPECIALIZADOS -->
-                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">
-                        <span class="w-5 h-1 bg-blue-500 rounded-full"></span>
-                        Servicios Especializados
-                    </h2>
+        <section class="card-3d border-glow-cian p-10 md:p-16 flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
+            <div class="chart-container order-2 md:order-1">
+                <canvas id="chart4"></canvas>
+            </div>
+            <div class="order-1 md:order-2">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-cyan-400 font-black text-4xl opacity-20">04</span>
+                    <h3 class="container-title text-white">Salud: El Oráculo Médico</h3>
+                </div>
+                <p class="text-gray-400 leading-relaxed mb-6">Desde el diagnóstico de precisión hasta AlphaFold. La IA está reduciendo el tiempo de descubrimiento de fármacos de décadas a solo meses.</p>
+            </div>
+        </section>
+
+        <section class="card-3d border-glow-emerald p-10 md:p-16 bg-emerald-500/5">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="flex items-center gap-4 mb-8">
+                        <span class="text-emerald-400 font-black text-4xl opacity-20">05</span>
+                        <h3 class="container-title text-white">Conducta y Psique</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-emerald-400 font-bold text-sm uppercase tracking-wider">Alineación Ética</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">Asegurar que los objetivos de una IA coincidan con los valores humanos, según Stanford HAI.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart5"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de Contacto -->
+        <section class="card-3d border-glow-cian p-10 md:p-16">
+            <div class="max-w-xl mx-auto">
+                <div class="text-center mb-8">
+                    <h3 class="container-title text-white">Contáctanos</h3>
+                    <p class="text-cyan-400 text-sm mt-2">Hablemos sobre el futuro de la Inteligencia Artificial</p>
+                </div>
+                <form action="https://formsubmit.co/rodrigo@dataflowia.com" method="POST" class="space-y-6">
+                    <input type="hidden" name="_subject" value="Nuevo contacto desde Relatoría IA">
                     <div class="space-y-2">
-                        <div class="service-item border-l-2 border-l-blue-500">Consultoría en IA Empresarial</div>
-                        <div class="service-item">Workshops & Masterclasses IA</div>
-                        <div class="service-item">Programas de Inducción Avanzada</div>
-                        <div class="service-item">Desarrollo de Apps con IA</div>
-                        <div class="service-item">Generación de Contenido Educativo</div>
-                        <div class="service-item">Video Marketing con IA</div>
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Nombre:</label>
+                        <input type="text" name="name" required class="form-input" placeholder="Tu nombre completo">
                     </div>
-                </section>
-            </div>
-
-            <!-- RIGHT COLUMN: EXPERIENCIA -->
-            <div class="md:col-span-2 space-y-6">
-                <section class="glass-card p-8">
-                    <h2 class="text-2xl font-bold mb-8 text-blue-400">Experiencia Profesional</h2>
-                    <div class="space-y-8 relative">
-                        <div class="timeline-line"></div>
-
-                        <!-- DataflowIA -->
-                        <div class="relative pl-8">
-                            <div class="timeline-dot"></div>
-                            <div class="flex justify-between items-start flex-wrap">
-                                <h3 class="text-lg font-bold text-white">DataflowIA</h3>
-                                <span class="px-2 py-1 bg-blue-500/10 text-blue-400 text-xs font-bold rounded">2025 - PRESENTE</span>
-                            </div>
-                            <p class="text-blue-300 font-semibold text-sm">Socio Fundador & AI Solutions Architect</p>
-                            <ul class="text-slate-400 mt-2 text-sm space-y-2">
-                                <li class="flex gap-2 text-justified">
-                                    <span>•</span> 
-                                    <span>Diseño e implementación de <b>arquitecturas RAG</b> para empresas, mejorando la precisión de respuestas en un 40%.</span>
-                                </li>
-                                <li class="flex gap-2 text-justified">
-                                    <span>•</span> 
-                                    <span>Despliegue de <b>GPTs corporativos personalizados</b> para automatización de procesos empresariales.</span>
-                                </li>
-                                <li class="flex gap-2 text-justified">
-                                    <span>•</span> 
-                                    <span>Optimización de flujos con <b>LLMs de última generación</b> (Claude, GPT-4, Gemini).</span>
-                                </li>
-                                <li class="flex gap-2 text-justified">
-                                    <span>•</span> 
-                                    <span>Consultoría estratégica en <b>transformación digital con IA</b> para empresas medianas y grandes.</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Visual Web Videos -->
-                        <div class="relative pl-8">
-                            <div class="timeline-dot"></div>
-                            <div class="flex justify-between items-start flex-wrap">
-                                <h3 class="text-lg font-bold text-white">Visual Web Videos</h3>
-                                <span class="px-2 py-1 bg-white/5 text-slate-500 text-xs font-bold rounded">2023 - 2025</span>
-                            </div>
-                            <p class="text-blue-300 font-semibold text-sm">Fundador & Director Creativo</p>
-                            <ul class="text-slate-400 mt-2 text-sm space-y-2">
-                                <li class="flex gap-2 text-justified">
-                                    <span>•</span> 
-                                    <span>Pionero en <b>video marketing digital asistido por IA</b> en Chile.</span>
-                                </li>
-                                <li class="flex gap-2 text-justified">
-                                    <span>•</span> 
-                                    <span>Creación de <b>contenido educativo y animaciones</b> utilizando herramientas de IA generativa.</span>
-                                </li>
-                                <li class="flex gap-2 text-justified">
-                                    <span>•</span> 
-                                    <span>Desarrollo de <b>teasers animados</b> y material publicitario con tecnología de vanguardia.</span>
-                                </li>
-                                <li class="text-xs italic text-slate-500 mt-1">Marketing, Videos, Manager, Website, Cápsulas educativas.</li>
-                            </ul>
-                        </div>
-
-                        <!-- ICASA SPA -->
-                        <div class="relative pl-8">
-                            <div class="timeline-dot bg-slate-600"></div>
-                            <div class="flex justify-between items-start flex-wrap">
-                                <h3 class="text-lg font-bold text-white">ICASA SPA</h3>
-                                <span class="text-xs text-slate-500 font-bold">2012 - 2022</span>
-                            </div>
-                            <p class="text-blue-300/80 text-sm font-semibold">Gerente General - Socio</p>
-                        </div>
-
-                        <!-- Constructora Cuatrosur -->
-                        <div class="relative pl-8">
-                            <div class="timeline-dot bg-slate-600"></div>
-                            <div class="flex justify-between items-start flex-wrap">
-                                <h3 class="text-lg font-bold text-white">Constructora Cuatrosur</h3>
-                                <span class="text-xs text-slate-500 font-bold">2001 - 2012</span>
-                            </div>
-                            <p class="text-blue-300/80 text-sm font-semibold">Gerente General - Socio</p>
-                        </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Email:</label>
+                        <input type="email" name="email" required class="form-input" placeholder="tu@correo.com">
                     </div>
-                </section>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Mensaje:</label>
+                        <textarea name="message" required rows="4" class="form-input resize-none" placeholder="Escribe aquí tu consulta o mensaje..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 px-6 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                        Enviar Mensaje
+                    </button>
+                </form>
             </div>
-        </div>
+        </section>
 
-        <!-- FOOTER -->
-        <footer class="glass-card p-10 text-center bg-blue-600/5 no-print space-y-6">
-            <div class="max-w-2xl mx-auto space-y-2">
-                <h2 class="text-3xl font-extrabold text-white">¿Listo para transformar tu negocio con IA?</h2>
-                <p class="text-slate-400 text-lg">Conversemos sobre cómo la Inteligencia Artificial puede impulsar la innovación y eficiencia en tu organización.</p>
+        <!-- Reflexión Estratégica -->
+        <section class="card-3d border-glow-indigo p-10 md:p-16 bg-indigo-500/5">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center">
+                        <span class="text-indigo-400 text-xl font-bold italic">M</span>
+                    </div>
+                    <h3 class="container-title text-white">Reflexión Estratégica</h3>
+                </div>
+                <div class="text-gray-300 leading-relaxed text-sm space-y-6">
+                    <p>
+                        Estamos en un punto de inflexión histórico donde la tecnología ya no solo procesa datos, sino que interpreta nuestra realidad y redefine lo que entendemos por productividad y creatividad. Como **Fundador de Dataflow IA**, mi compromiso es guiar esta transición asegurando que la adopción de la inteligencia artificial no sea un proceso de sustitución, sino una expansión del potencial humano.
+                    </p>
+                    <p>
+                        El futuro no pertenece a las máquinas, sino a quienes sepan colaborar con ellas para resolver los desafíos más complejos de nuestra civilización. Te invito a ser parte de esta revolución con propósito, donde la innovación y la humanidad caminan de la mano.
+                    </p>
+                </div>
             </div>
-            
-            <div class="flex flex-wrap justify-center gap-4 pt-4">
-                <button type="button" onclick="handleDownload()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-600/20">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    Descargar CV (PDF)
-                </button>
-                <button type="button" onclick="openModal()" class="border border-blue-500/50 hover:border-blue-500 bg-blue-500/5 text-blue-400 px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-2 cursor-pointer">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    Enviar Mensaje
-                </button>
+        </section>
+
+        <!-- Conclusión -->
+        <section class="py-20 text-center">
+            <div class="max-w-3xl mx-auto p-12 rounded-[3rem] bg-white text-slate-900 shadow-[0_0_50px_rgba(6,182,212,0.3)]">
+                <p class="text-2xl font-light italic leading-relaxed mb-10">
+                    "La IA no es el fin de nuestra historia, es el comienzo de una colaboración donde debemos definir qué es lo que nos hace irreemplazables."
+                </p>
+                <div class="flex flex-col items-center">
+                    <div class="h-1 w-12 bg-cyan-500 mb-4"></div>
+                    <span class="font-black text-xl tracking-tighter uppercase">Rodrigo Cárcamo Hurtado</span>
+                    <p class="text-gray-500 font-bold text-[10px] uppercase tracking-widest mb-1">Ingeniero Comercial - USACH</p>
+                    <span class="text-cyan-600 font-bold text-xs uppercase tracking-widest">Fundador DataflowIA</span>
+                </div>
             </div>
-        </footer>
+        </section>
+
     </main>
 
-    <!-- CONTACT MODAL -->
-    <div id="contactModal" class="no-print" onclick="closeModal(event)">
-        <div class="glass-card w-full max-w-lg p-8 space-y-6" onclick="event.stopPropagation()" style="background: #111827; border: 1px solid rgba(255,255,255,0.05);">
-            <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-white tracking-tight">Enviar Mensaje</h2>
-                <button onclick="closeModal()" class="text-slate-500 hover:text-white cursor-pointer transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
+    <footer class="bg-slate-950 text-white py-16 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="brand-logo text-cyan-400 font-black text-4xl tracking-tighter mb-10">
+                DATAFLOW IA
             </div>
-            <!-- El formulario ahora envía directamente a rodrigo@dataflowia.com -->
-            <form id="contactForm" class="space-y-4" onsubmit="handleFormSubmit(event)">
-                <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-2">Nombre completo</label>
-                    <input type="text" id="nameInput" placeholder="Tu nombre" required class="input-field">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-2">Email</label>
-                    <input type="email" id="emailInput" placeholder="tu@email.com" required class="input-field">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-2">Mensaje</label>
-                    <textarea id="msgInput" placeholder="Cuéntame sobre tu proyecto..." required rows="4" class="input-field resize-none"></textarea>
-                </div>
-                <div class="pt-4">
-                    <button type="submit" class="submit-btn cursor-pointer">
-                        Enviar a rodrigo@dataflowia.com
-                    </button>
-                </div>
-            </form>
-            <div id="formStatus" class="hidden text-center p-3 rounded-lg bg-green-500/10 text-green-400 font-medium">
-                Abriendo tu aplicación de correo...
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-12 text-gray-400 text-sm">
+                <a href="https://www.dataflowia.com" class="hover:text-cyan-400 transition-colors">www.dataflowia.com</a>
+                <a href="mailto:rodrigo@dataflowia.com" class="hover:text-cyan-400 transition-colors">rodrigo@dataflowia.com</a>
+            </div>
+            <div class="text-[10px] text-gray-600 uppercase tracking-[0.5em]">
+                &copy; 2026 Todos los derechos reservados | Rodrigo Cárcamo | Ingeniero Comercial - USACH
             </div>
         </div>
-    </div>
+    </footer>
 
     <script>
-        function handleDownload() {
-            try {
-                setTimeout(() => { window.print(); }, 50);
-            } catch (err) { console.error("Error al imprimir:", err); }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.card-3d').forEach(card => observer.observe(card));
+
+        window.onload = () => {
+            const baseRadarOptions = {
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    r: {
+                        min: 0,
+                        max: 100,
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { display: false, stepSize: 20 },
+                        pointLabels: { color: 'rgba(255, 255, 255, 0.5)', font: { size: 10 } }
+                    }
+                }
+            };
+
+            new Chart(document.getElementById('chart1'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Cómputo', 'Datos', 'Algoritmos'],
+                    datasets: [{
+                        data: [40, 35, 25],
+                        backgroundColor: ['#06b6d4', '#1e293b', '#334155'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            new Chart(document.getElementById('chart2'), {
+                type: 'radar',
+                data: {
+                    labels: ['TikTok', 'Spotify', 'Amazon', 'Google', 'Meta'],
+                    datasets: [{
+                        data: [95, 80, 70, 90, 85],
+                        borderColor: '#6366f1',
+                        backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#6366f1'
+                    }]
+                },
+                options: baseRadarOptions
+            });
+
+            new Chart(document.getElementById('chart3'), {
+                type: 'bar',
+                data: {
+                    labels: ['Legales', 'Software', 'Arte', 'Admin'],
+                    datasets: [{
+                        data: [70, 85, 40, 90],
+                        backgroundColor: '#ec4899',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#64748b' } },
+                        y: { display: false }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('chart4'), {
+                type: 'polarArea',
+                data: {
+                    labels: ['Diagnóstico', 'Farmacia', 'Genética', 'Proteínas'],
+                    datasets: [{
+                        data: [80, 95, 70, 85],
+                        backgroundColor: ['rgba(6,182,212,0.5)', 'rgba(30,41,59,0.5)', 'rgba(15,23,42,0.5)', 'rgba(6,182,212,0.8)'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { r: { grid: { display: false }, ticks: { display: false } } }
+                }
+            });
+
+            new Chart(document.getElementById('chart5'), {
+                type: 'radar',
+                data: {
+                    labels: ['Confianza', 'Empatía', 'Dependencia', 'Seguridad', 'Ética'],
+                    datasets: [{
+                        data: [40, 70, 85, 30, 90],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderWidth: 2
+                    }]
+                },
+                options: baseRadarOptions
+            });
         }
-
-        function openModal() {
-            const modal = document.getElementById('contactModal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(e) {
-            const modal = document.getElementById('contactModal');
-            if (!e || e.target.id === 'contactModal' || (e.type === 'click' && e.target.closest('button'))) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const status = document.getElementById('formStatus');
-            const form = document.getElementById('contactForm');
-            
-            const name = document.getElementById('nameInput').value;
-            const email = document.getElementById('emailInput').value;
-            const message = document.getElementById('msgInput').value;
-
-            // Incrustando el email solicitado
-            const recipient = "rodrigo@dataflowia.com";
-            const subject = encodeURIComponent(`Nuevo contacto desde CV: ${name}`);
-            const body = encodeURIComponent(`Hola Rodrigo,\n\nHas recibido un nuevo mensaje desde tu CV web:\n\nNombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`);
-
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.innerText;
-            btn.innerText = "Preparando correo...";
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                // Abre el cliente de correo con los datos incrustados
-                window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-                
-                form.classList.add('hidden');
-                status.classList.remove('hidden');
-                
-                setTimeout(() => {
-                    closeModal();
-                    form.reset();
-                    form.classList.remove('hidden');
-                    status.classList.add('hidden');
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                }, 3000);
-            }, 500);
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
     </script>
 </body>
 </html>
