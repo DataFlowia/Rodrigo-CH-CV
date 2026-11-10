@@ -69,6 +69,8 @@ aside{display:grid;gap:12px}
 @media(max-width:720px){
 .w{padding:14px 12px 44px}.hero{padding:26px 18px}.stats{grid-template-columns:1fr 1fr}.stat b{font-size:22px}
 .chips .btn{flex:1 1 100%}.grid{grid-template-columns:1fr}.fh{padding:14px 16px}.fi{padding:0 16px}.card{padding:18px}.fold{padding:0}}
+.bar{display:flex;gap:10px;justify-content:flex-end;margin:14px 0 10px}.bar .btn{min-height:40px;padding:8px 14px;font-size:14px}
+@media(max-width:720px){.bar .btn{flex:1}}
 @media(prefers-reduced-motion:reduce){.card::after{animation:none}.fb,.chev{transition:none}}
 @media print{@page{size:A4;margin:1cm}:root{--tx:#0f172a;--mu:#3b4658;--ac:#0e7490;--ac2:#0e7490;--bd:#d5dbe6;--surf:#fff}
 body{background:#fff!important;color:#0f172a}.no-print,.chev,.card::after{display:none!important}.card{break-inside:avoid}
@@ -96,6 +98,8 @@ body{background:#fff!important;color:#0f172a}.no-print,.chev,.card::after{displa
   <div class="card stat"><b>Frentes</b><span>modelación de negocios · apps · automatización · cápsulas · talleres</span></div>
   <div class="card stat"><b>30+</b><span>plataformas y herramientas</span></div>
 </div>
+
+<div class="bar no-print"><button class="btn" id="colAll" type="button">▲ Contraer todo</button><button class="btn" id="expAll" type="button">▼ Expandir todo</button></div>
 
 <section class="card fold open" data-open="true">
   <button class="fh" aria-expanded="true"><span class="ht">Perfil</span><i class="chev"></i></button>
@@ -156,6 +160,9 @@ document.querySelectorAll('.fold').forEach(function(f){
   var b=f.querySelector(':scope>.fh');
   b.addEventListener('click',function(){set(f,!f.classList.contains('open'))});
 });
+function all(o){document.querySelectorAll('.fold').forEach(function(f){set(f,o)})}
+document.getElementById('colAll').addEventListener('click',function(){all(false)});
+document.getElementById('expAll').addEventListener('click',function(){all(true)});
 })();
 </script>
 </body>
